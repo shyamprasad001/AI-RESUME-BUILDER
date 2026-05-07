@@ -1,0 +1,146 @@
+/* Login Page v2.0 — Split Panel */
+.login-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Left: Brand panel ──────────────────────────────────── */
+.login-brand-panel {
+  width: 44%;
+  background: var(--gray-950);
+  padding: var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.login-brand-orb-1 {
+  position: absolute; top: -120px; right: -100px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-brand-orb-2 {
+  position: absolute; bottom: -80px; left: -60px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-brand-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: var(--sp-10);
+}
+.login-brand-logo {
+  display: flex; align-items: center;
+  gap: var(--sp-2); text-decoration: none;
+}
+.login-brand-name {
+  font-size: 15px; font-weight: 700;
+  color: #ffffff; letter-spacing: -0.01em;
+}
+.login-brand-h1 {
+  font-size: 34px; font-weight: 700; color: #ffffff;
+  line-height: 1.15; letter-spacing: -0.02em;
+}
+.login-brand-accent { color: var(--brand-soft); }
+.login-brand-sub {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  margin-top: var(--sp-3); line-height: 1.65; max-width: 360px;
+}
+.login-feature-list {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.login-feature-card {
+  display: flex; align-items: flex-start; gap: var(--sp-3);
+}
+.login-feature-icon {
+  width: 34px; height: 34px; border-radius: var(--radius-md);
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-soft); font-size: 15px; flex-shrink: 0;
+}
+.login-feature-label {
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9);
+  margin-bottom: 1px;
+}
+.login-feature-desc {
+  font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5;
+}
+.login-brand-trust {
+  display: flex; gap: var(--sp-4); flex-wrap: wrap;
+  font-size: 12px; color: rgba(255,255,255,0.35);
+}
+.login-brand-trust span {
+  display: flex; align-items: center; gap: 4px;
+}
+
+/* ── Right: Form panel ──────────────────────────────────── */
+.login-form-panel {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--sp-12);
+  background: var(--soft-surface);
+}
+.login-form-container {
+  width: 100%; max-width: 380px;
+}
+.login-back-link {
+  display: inline-block;
+  font-size: 13px; color: var(--gray-400);
+  text-decoration: none; margin-bottom: var(--sp-8);
+  transition: color var(--t-fast);
+}
+.login-back-link:hover { color: var(--gray-800); }
+.login-form-title {
+  font-size: var(--text-h2); font-weight: 700;
+  color: var(--gray-950); letter-spacing: -0.015em;
+  margin-bottom: var(--sp-1);
+}
+.login-form-sub {
+  font-size: 14px; color: var(--gray-400); margin-bottom: 0;
+}
+
+/* Divider */
+.login-divider {
+  display: flex; align-items: center; gap: var(--sp-3);
+  margin: var(--sp-4) 0;
+}
+.login-divider-line { flex: 1; height: 1px; background: var(--gray-200); }
+.login-divider-text { font-size: 12px; color: var(--gray-400); font-weight: 500; }
+
+/* Toggle */
+.login-toggle-text {
+  text-align: center; font-size: 13px;
+  color: var(--gray-400); margin-top: var(--sp-6);
+}
+.login-toggle-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--brand); font-weight: 600; font-size: 13px;
+  text-decoration: underline; padding: 0;
+  transition: color var(--t-fast);
+}
+.login-toggle-btn:hover { color: var(--brand-hover); }
+
+/* ── Auth card (kept for backward-compat if referenced) ── */
+.auth-page {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--soft-surface); padding: var(--sp-12) var(--sp-6);
+}
+.auth-card {
+  width: 100%; max-width: 440px;
+  background: var(--surface); border: 1px solid var(--gray-200);
+  border-radius: var(--radius-xl); border-top: 3px solid var(--brand);
+  padding: var(--sp-8); box-shadow: var(--shadow-md);
+}
+.auth-trust-line {
+  display: flex; justify-content: center; gap: var(--sp-4);
+  margin-top: var(--sp-6); font-size: 12px; color: var(--gray-400);
+}
+
+@media (max-width: 1024px) {
+  .login-brand-panel { display: none; }
+  .login-form-panel  { padding: var(--sp-6); }
+}

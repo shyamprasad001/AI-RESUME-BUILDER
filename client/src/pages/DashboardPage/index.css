@@ -1,0 +1,52 @@
+/* Dashboard v2.0 */
+.dashboard-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-6);
+}
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-8);
+}
+
+/* Resume cards (shared — also used in HomePage) */
+.resume-card {
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow var(--t-base), transform var(--t-base), border-color var(--t-base);
+}
+.resume-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--gray-300);
+}
+.resume-card-bar  { height: 3px; }
+.resume-card-body { padding: var(--sp-4); }
+
+.resume-card-delete {
+  width: 28px; height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none;
+  color: var(--error); cursor: pointer;
+  opacity: 0.25;
+  transition: opacity var(--t-fast), background var(--t-fast);
+}
+.resume-card:hover .resume-card-delete { opacity: 0.6; }
+.resume-card-delete:hover {
+  opacity: 1 !important;
+  background: var(--error-soft);
+}
+
+.resume-card-score-bar {
+  height: 4px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  flex: 1;
+}

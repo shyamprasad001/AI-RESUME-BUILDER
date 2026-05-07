@@ -1,0 +1,16 @@
+/* ProgressBar v2.0 — tokens defined in App.css */
+.progress-track {
+  flex: 1;
+  height: 5px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-fill-green  { background: var(--success); }
+.progress-fill-amber  { background: var(--warning); }
+.progress-fill-purple { background: var(--brand); }

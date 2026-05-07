@@ -1,0 +1,32 @@
+/* Version Card v2.0 */
+.version-card {
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-left: 3px solid var(--brand);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: var(--sp-4) var(--sp-4) var(--sp-4) calc(var(--sp-4) - 3px);
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+.version-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateX(2px);
+}
+.version-badge {
+  display: inline-flex; align-items: center;
+  font-size: var(--text-xs); font-weight: 600;
+  padding: 2px 8px; border-radius: var(--radius-full);
+}
+
+/* Diff view */
+.diff-panel {
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+}
+.diff-original {
+  background: var(--error-soft);
+  border: 1px solid #FECACA;
+}
+.diff-improved {
+  background: var(--success-soft);
+  border: 1px solid #BBF7D0;
+}

@@ -1,0 +1,134 @@
+/* ATS Score Panel v2.0 */
+
+/* Job description textarea area */
+.ats-jd-box {
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.ats-jd-box:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+
+/* Keyword tags */
+.keyword-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--error-soft);
+  color: var(--error);
+}
+.keyword-tag-present {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+/* Suggestion items */
+.suggestion-item {
+  background: var(--brand-light);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius-md);
+  padding: 10px var(--sp-3);
+  font-size: 13px;
+  color: var(--gray-800);
+  line-height: 1.55;
+  animation: fadeIn var(--t-base) both;
+}
+
+/* Checklist / breakdown rows */
+.metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-1);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+.metric-row:hover {
+  background: var(--gray-50);
+}
+.metric-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-800);
+  flex: 1;
+  min-width: 120px;
+}
+.metric-bar {
+  flex: 1;
+  min-width: 80px;
+  height: 5px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.metric-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.metric-score {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: right;
+}
+.metric-weight {
+  font-size: 10px;
+  color: var(--gray-400);
+  min-width: 28px;
+}
+.metric-fix {
+  width: 100%;
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--gray-600);
+  background: var(--brand-light);
+  border-left: 2px solid var(--brand);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+  animation: fadeIn 140ms ease-out;
+}
+
+/* Score circle */
+.score-circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.score-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.score-value {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+.score-label {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+}

@@ -1,0 +1,10 @@
+/* BulletDiffView v2.0 */
+.diff-panel  { border-radius: var(--radius-md); padding: var(--sp-4); }
+.diff-original {
+  background: var(--error-soft);
+  border: 1px solid #FECACA;
+}
+.diff-improved {
+  background: var(--success-soft);
+  border: 1px solid #BBF7D0;
+}

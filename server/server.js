@@ -8,18 +8,19 @@
 import "dotenv/config";
 import app from "./src/app.js";
 import connectDB from "./src/config/db.config.js";
+import logger from "./src/utils/logger.js";
 
 const PORT = process.env.PORT || 5000;
 
 // Catch unhandled promise rejections so the process never silently crashes
 // (a crash produces ERR_CONNECTION_RESET instead of a proper 500 response)
 process.on("unhandledRejection", (reason) => {
-  console.error("[unhandledRejection] Uncaught promise rejection:", reason);
+  logger.error({ reason }, "[unhandledRejection] Uncaught promise rejection");
   // Do NOT exit — let Express keep serving other requests
 });
 
 process.on("uncaughtException", (err) => {
-  console.error("[uncaughtException]", err.message, err.stack);
+  logger.error({ err }, `[uncaughtException] ${err.message}`);
 });
 
 const startServer = async () => {
@@ -27,9 +28,9 @@ const startServer = async () => {
     await connectDB();
 
     const server = app.listen(PORT, () => {
-      console.log(`\n Server is running on port ${PORT}`);
-      console.log(` Environment: ${process.env.NODE_ENV || "development"}`);
-      console.log(` URL: http://localhost:${PORT}\n`);
+      logger.info(`Server is running on port ${PORT}`);
+      logger.info(`Environment: ${process.env.NODE_ENV || "development"}`);
+      logger.info(`URL: http://localhost:${PORT}`);
     });
 
     // Gemini API calls (especially ATS score) can take 30-90 seconds.
@@ -39,7 +40,7 @@ const startServer = async () => {
     server.keepAliveTimeout = 120_000; // HTTP keep-alive timeout
     server.headersTimeout = 125_000;   // must be slightly > keepAliveTimeout
   } catch (error) {
-    console.error("Failed to start server:", error.message);
+    logger.error({ error }, "Failed to start server");
     process.exit(1);
   }
 };

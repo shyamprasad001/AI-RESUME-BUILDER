@@ -64,6 +64,7 @@ function VersionCard({ version, onRestore, onDelete }) {
           Restore
         </button>
         <button
+          data-testid={`delete-version-${version._id}`}
           onClick={() => onDelete(version._id)}
           className="btn btn-danger btn-sm flex-row flex-center items-center gap-sm"
         >

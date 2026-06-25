@@ -2,6 +2,8 @@
 // error.middleware.js - Global Error Handling
 // ============================================
 
+import logger from '../utils/logger.js';
+
 // Middleware function (Express.js: Middleware)
 export const notFoundHandler = (req, res, next) => {
   res.status(404).json({
@@ -16,10 +18,9 @@ export const errorHandler = (err, req, res, next) => {
 
   // Log full stack in development for easier debugging
   if (process.env.NODE_ENV !== 'production') {
-    console.error(`[${statusCode}] ${req.method} ${req.originalUrl}`);
-    console.error(err.stack || err.message);
+    logger.error({ err, route: `${req.method} ${req.originalUrl}` }, `[${statusCode}] Error occurred`);
   } else {
-    console.error('Error:', err.message);
+    logger.error({ route: `${req.method} ${req.originalUrl}` }, `Error: ${err.message}`);
   }
 
   res.status(statusCode).json({

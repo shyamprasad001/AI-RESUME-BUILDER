@@ -11,12 +11,13 @@ import {
 } from "../controllers/resume.controller.js";
 import authenticate from "../middleware/auth.middleware.js";
 import upload from "../middleware/upload.middleware.js";
+import { strictLimiter } from "../middleware/rateLimiter.middleware.js";
 
 const router = Router();
 
 router.use(authenticate);
 
-router.post("/upload", upload.single("file"), uploadResume);
+router.post("/upload", strictLimiter, upload.single("file"), uploadResume);
 router.post("/", createResume);
 router.get("/", getResumes);
 router.get("/:id", getResume);

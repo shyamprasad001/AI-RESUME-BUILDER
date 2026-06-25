@@ -10,10 +10,12 @@ import {
   getChatHistory,
 } from "../controllers/ai.controller.js";
 import authenticate from "../middleware/auth.middleware.js";
+import { strictLimiter } from "../middleware/rateLimiter.middleware.js";
 
 const router = Router();
 
 router.use(authenticate);
+router.use(strictLimiter);
 
 router.post("/chat", chat);
 router.post("/generate-bullets", generateBullets);

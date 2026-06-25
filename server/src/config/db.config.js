@@ -3,6 +3,7 @@
 // ============================================
 
 import mongoose from 'mongoose'; // Mongoose ODM (MongoDB: Database Connection)
+import logger from '../utils/logger.js';
 
 // Using async/await pattern (JS Essentials: Async/Await)
 const connectDB = async () => {
@@ -14,9 +15,9 @@ const connectDB = async () => {
     }
 
     const conn = await mongoose.connect(mongoURI); // Mongoose connection (MongoDB: Database Connection)
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    logger.info(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`MongoDB Connection Error: ${error.message}`);
+    logger.error(`MongoDB Connection Error: ${error.message}`);
     process.exit(1);
   }
 };

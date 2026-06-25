@@ -1,81 +1,76 @@
-import { GoogleGenAI } from "@google/genai";
+const MODEL_NAME = "tencent/hy3-preview:free";
+import logger from '../utils/logger.js';
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const MODEL_NAME = "gemini-2.5-flash";
+// Create an Axios instance for OpenRouter
+const aiClient = axios.create({
+  baseURL: "https://openrouter.ai/api/v1",
+});
 
-// Transient HTTP status codes that are safe to retry
-const RETRYABLE_CODES = [429, 503, 502, 504];
-const MAX_RETRIES = 3;
-const BASE_DELAY_MS = 1500; // 1.5s → 3s → 6s
-
-/** Returns true if the error message contains a retryable HTTP status code. */
-const isRetryable = (message = "") =>
-  RETRYABLE_CODES.some((code) => message.includes(String(code)));
-
-/** Sleep helper */
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const MODELS = [MODEL_NAME, "gemini-1.5-flash", "gemini-2.5-flash-lite"];
+// Configure axios-retry with exponential backoff
+axiosRetry(aiClient, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay, // 100ms -> 200ms -> 400ms etc
+  retryCondition: (error) => {
+    // Retry on network errors or 5xx/429 status codes
+    return axiosRetry.isNetworkOrIdempotentRequestError(error) || 
+           error.response?.status === 429 || 
+           (error.response?.status >= 500 && error.response?.status <= 599);
+  },
+  onRetry: (retryCount, error, requestConfig) => {
+    logger.warn(`[OpenRouter] Attempt ${retryCount}/3 failed. Retrying... Error: ${error.message}`);
+  }
+});
 
 /**
- * generateContent — calls Gemini and retries on transient 503 / 429 errors.
- * Now includes model fallback if quota is exhausted.
+ * generateContent — calls OpenRouter using Axios and handles transient errors
  */
 const generateContent = async (prompt) => {
-  let lastError;
-
-  for (const modelId of MODELS) {
-    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-      try {
-        const response = await ai.models.generateContent({
-          model: modelId,
-          contents: prompt,
-          config: {
-            maxOutputTokens: 8192,
-            temperature: 0.2,
-          }
-        });
-        return response.text;
-      } catch (error) {
-        lastError = error;
-        const msg = error.message || "";
-
-        // If it's a quota error (429), check if we should try next model or retry
-        if (msg.includes("429")) {
-          // If we have more models to try, move to next model immediately
-          if (MODELS.indexOf(modelId) < MODELS.length - 1) {
-            console.warn(`[Gemini] Model ${modelId} exhausted. Falling back to next model...`);
-            break; // Break inner retry loop to try next model
-          }
-        }
-
-        if (isRetryable(msg) && attempt < MAX_RETRIES) {
-          // Check for a specific retry delay in the error message (e.g. "retry in 51s")
-          let delay = BASE_DELAY_MS * Math.pow(2, attempt - 1);
-          const match = msg.match(/retry in ([\d.]+)s/);
-          if (match) {
-            delay = Math.max(delay, parseFloat(match[1]) * 1000 + 500);
-          }
-
-          console.warn(
-            `[Gemini] Attempt ${attempt}/${MAX_RETRIES} (${modelId}) failed. ` +
-              `Retrying in ${Math.round(delay)}ms…`,
-          );
-          await sleep(delay);
-          continue;
-        }
-
-        // If not retryable or final model/attempt, throw
-        if (MODELS.indexOf(modelId) === MODELS.length - 1) {
-          console.error("[Gemini] Critical API Error:", msg);
-          throw new Error(`Gemini API failed after all fallbacks: ${msg}`);
-        }
-        break; // Try next model
-      }
-    }
+  if (!process.env.OPENROUTER_API_KEY) {
+    throw new Error("OPENROUTER_API_KEY is not set in environment variables. Please add it to your .env file and restart the server.");
   }
 
-  throw new Error(`Gemini API failed: ${lastError?.message}`);
+  // Set timeout via AbortController
+  // Note: Using 60 seconds as default instead of 10s because LLMs regularly take >10s to generate responses
+  const timeoutMs = parseInt(process.env.AI_API_TIMEOUT || '60000', 10);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const apiKey = process.env.OPENROUTER_API_KEY.trim();
+    
+    const response = await aiClient.post("/chat/completions", {
+      model: MODEL_NAME,
+      messages: [
+        { role: "user", content: prompt }
+      ],
+      temperature: 0.2,
+      max_tokens: 8192
+    }, {
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": process.env.SITE_URL || "http://localhost:5000",
+        "X-Title": "AI Resume Builder"
+      },
+      signal: controller.signal
+    });
+
+    if (!response.data.choices || response.data.choices.length === 0) {
+      throw new Error("No choices in OpenRouter response");
+    }
+    return response.data.choices[0].message.content;
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      logger.error("[OpenRouter] Request timed out");
+      throw new Error(`OpenRouter API timed out after ${timeoutMs}ms`);
+    }
+    logger.error({ error: error.message }, "[OpenRouter] API Error");
+    throw new Error(`OpenRouter API failed: ${error.message}`);
+  } finally {
+    clearTimeout(timeoutId);
+  }
 };
 
-export { ai, MODEL_NAME, generateContent };
+export { MODEL_NAME, generateContent };

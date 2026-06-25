@@ -1,6 +1,7 @@
 import * as resumeService from "../services/resume.service.js";
 import extractTextFromPdf from "../utils/resumeParser.js";
 import * as aiService from "../services/ai.service.js";
+import logger from "../utils/logger.js";
 
 export const createResume = async (req, res, next) => {
   try {
@@ -158,9 +159,9 @@ export const uploadResume = async (req, res, next) => {
 
     // 3. Guard: if AI returned an error object instead of valid sections, fail gracefully
     if (!parsedSections || parsedSections.error) {
-      console.error(
-        "[uploadResume] AI parse failed. Raw AI output:",
-        parsedSections?.raw?.slice?.(0, 500) ?? "no output",
+      logger.error(
+        { raw: parsedSections?.raw?.slice?.(0, 500) ?? "no output" },
+        "[uploadResume] AI parse failed."
       );
       return res.status(422).json({
         success: false,

@@ -63,8 +63,8 @@ const parseCertificationString = (raw) => {
         // "APSSDC — Django Web Dev"  → issuer=APSSDC, name=Django Web Dev
         const [first, ...rest] = parts;
         return {
-          name: rest.join(" ").trim() || first,
-          issuer: first || "Unknown",
+          name: rest.join(" ").trim(),
+          issuer: first,
           date,
           link,
         };

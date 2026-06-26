@@ -1,4 +1,4 @@
-const MODEL_NAME = "tencent/hy3-preview:free";
+const MODEL_NAME = "openrouter/free";
 import logger from '../utils/logger.js';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';

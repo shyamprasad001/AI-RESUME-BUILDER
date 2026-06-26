@@ -15,15 +15,14 @@ import { strictLimiter } from "../middleware/rateLimiter.middleware.js";
 const router = Router();
 
 router.use(authenticate);
-router.use(strictLimiter);
 
-router.post("/chat", chat);
-router.post("/generate-bullets", generateBullets);
-router.post("/generate-summary", generateSummary);
-router.post("/ats-score", atsScore);
-router.post("/review", review);
-router.post("/match-job", matchJob);
-router.post("/skill-gaps", skillGaps);
+router.post("/chat", strictLimiter, chat);
+router.post("/generate-bullets", strictLimiter, generateBullets);
+router.post("/generate-summary", strictLimiter, generateSummary);
+router.post("/ats-score", strictLimiter, atsScore);
+router.post("/review", strictLimiter, review);
+router.post("/match-job", strictLimiter, matchJob);
+router.post("/skill-gaps", strictLimiter, skillGaps);
 router.get("/chat-history/:resumeId", getChatHistory);
 
 export default router;

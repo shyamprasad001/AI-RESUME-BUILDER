@@ -1,0 +1,6 @@
+projectKey=ATS-Resume-Builder
+serverUrl=http://localhost:9000
+serverVersion=25.12.0.117093
+dashboardUrl=http://localhost:9000/dashboard?id=ATS-Resume-Builder
+ceTaskId=920e49fe-2118-42db-ae46-41275a232526
+ceTaskUrl=http://localhost:9000/api/ce/task?id=920e49fe-2118-42db-ae46-41275a232526

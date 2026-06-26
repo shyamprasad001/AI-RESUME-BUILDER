@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.env
+coverage
+tests
+*.test.js
+*.spec.js
+.DS_Store
+.git
+.scannerwork
+.vscode

@@ -17,7 +17,18 @@ const app = express(); // Express app instance (Express.js: Application Setup)
 
 // --- Middleware ---
 app.use(pinoHttp({ logger }));
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
+const getOrigins = () => {
+  const origins = ['http://localhost:5173'];
+  if (process.env.CLIENT_URL) {
+    origins.push(process.env.CLIENT_URL.startsWith('http') ? process.env.CLIENT_URL : `https://${process.env.CLIENT_URL}`);
+  }
+  if (process.env.FRONTEND_URL) {
+    origins.push(process.env.FRONTEND_URL.startsWith('http') ? process.env.FRONTEND_URL : `https://${process.env.FRONTEND_URL}`);
+  }
+  return origins;
+};
+
+app.use(cors({ origin: getOrigins(), credentials: true }));
 app.use(globalLimiter);
 app.use(express.json({ limit: '10mb' }));
 

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,7 +94,7 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,25 +107,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">40x</span>
+<span class="cline-any cline-yes">40x</span>
+<span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const WEIGHTS = <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const WEIGHTS = {
   keywordMatch: 0.2,
   bulletQuality: 0.15,
   formatting: 0.1,
@@ -138,21 +138,21 @@
   contactInfo: 0.05,
 };
 &nbsp;
-const calculateOverallScore = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(m</span>etrics) =&gt; {</span>
-  let overall = <span class="cstat-no" title="statement not covered" >0;</span>
-<span class="cstat-no" title="statement not covered" >  for (const [metric, weight] of Object.entries(WEIGHTS)) {</span>
-    let score = <span class="cstat-no" title="statement not covered" >metrics[metric] || 0;</span>
-<span class="cstat-no" title="statement not covered" >    if (typeof score === "object") <span class="cstat-no" title="statement not covered" >score = score.score || 0;</span></span>
-<span class="cstat-no" title="statement not covered" >    overall += score * weight;</span>
+const calculateOverallScore = (metrics) =&gt; {
+  let overall = 0;
+  for (const [metric, weight] of Object.entries(WEIGHTS)) {
+    let score = metrics[metric] || 0;
+    if (typeof score === "object") score = score.score || 0;
+    overall += score * weight;
   }
-<span class="cstat-no" title="statement not covered" >  return Math.round(overall);</span>
+  return Math.round(overall);
 };
 &nbsp;
-const getScoreCategory = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>core) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  if (score &gt;= 80) <span class="cstat-no" title="statement not covered" >return "strong";</span></span>
-<span class="cstat-no" title="statement not covered" >  if (score &gt;= 60) <span class="cstat-no" title="statement not covered" >return "good";</span></span>
-<span class="cstat-no" title="statement not covered" >  if (score &gt;= 40) <span class="cstat-no" title="statement not covered" >return "needs-work";</span></span>
-<span class="cstat-no" title="statement not covered" >  return "weak";</span>
+const getScoreCategory = (score) =&gt; {
+  if (score &gt;= 80) return "strong";
+  if (score &gt;= 60) return "good";
+  if (score &gt;= 40) return "needs-work";
+  return "weak";
 };
 &nbsp;
 export { calculateOverallScore, getScoreCategory };
@@ -163,7 +163,7 @@ export { calculateOverallScore, getScoreCategory };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-24T11:00:45.564Z
+                at 2026-08-29T16:41:53.361Z
             </div>
         <script src="../prettify.js"></script>
         <script>

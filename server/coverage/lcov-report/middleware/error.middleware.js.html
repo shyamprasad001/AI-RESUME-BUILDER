@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,25 +101,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,25 +132,25 @@
 import logger from '../utils/logger.js';
 &nbsp;
 // Middleware function (Express.js: Middleware)
-export const notFoundHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(r</span>eq, res, next) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  res.status(404).json({</span>
+export const notFoundHandler = (req, res, next) =&gt; {
+  res.status(404).json({
     success: false,
     message: `Route not found: ${req.method} ${req.originalUrl}`, // Template literal (JS Essentials: Template Literals)
   });
 };
 &nbsp;
 // Global error handler (Express.js: Error Handling)
-export const errorHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>rr, req, res, next) =&gt; {</span>
-  const statusCode = <span class="cstat-no" title="statement not covered" >err.statusCode || 500;</span>
+export const errorHandler = (err, req, res, next) =&gt; {
+  const statusCode = err.statusCode || 500;
 &nbsp;
   // Log full stack in development for easier debugging
-<span class="cstat-no" title="statement not covered" >  if (process.env.NODE_ENV !== 'production') {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error({ err, route: `${req.method} ${req.originalUrl}` }, `[${statusCode}] Error occurred`);</span>
+  if (process.env.NODE_ENV !== 'production') {
+    logger.error({ err, route: `${req.method} ${req.originalUrl}` }, `[${statusCode}] Error occurred`);
   } else {
-<span class="cstat-no" title="statement not covered" >    logger.error({ route: `${req.method} ${req.originalUrl}` }, `Error: ${err.message}`);</span>
+    logger.error({ route: `${req.method} ${req.originalUrl}` }, `Error: ${err.message}`);
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.status(statusCode).json({</span>
+  res.status(statusCode).json({
     success: false,
     message: err.message || 'Something went wrong on the server.',
     ...(process.env.NODE_ENV !== 'production' &amp;&amp; { stack: err.stack }),
@@ -163,7 +163,7 @@ export const errorHandler = <span class="cstat-no" title="statement not covered"
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-24T11:00:45.564Z
+                at 2026-08-29T16:41:53.361Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -7,11 +7,11 @@
 
 import { Document, Page } from '@react-pdf/renderer';
 import TEMPLATES from '../../constants/templates.js';
-import ClassicPdf from '../pdf-templates/ClassicPdf.jsx';
-import ModernPdf from '../pdf-templates/ModernPdf.jsx';
-import CreativePdf from '../pdf-templates/CreativePdf.jsx';
-import MinimalPdf from '../pdf-templates/MinimalPdf.jsx';
+import HarvardPdf from '../pdf-templates/HarvardPdf.jsx';
+import TechPdf from '../pdf-templates/TechPdf.jsx';
+import StandardPdf from '../pdf-templates/StandardPdf.jsx';
 import ExecutivePdf from '../pdf-templates/ExecutivePdf.jsx';
+import ModernMinimalPdf from '../pdf-templates/ModernMinimalPdf.jsx';
 
 function PdfDocument({ resume }) {
   const template = TEMPLATES.find((t) => t.id === resume.templateId) || TEMPLATES[0];
@@ -26,17 +26,17 @@ function PdfDocument({ resume }) {
     };
 
     switch (resume.templateId) {
-      case 'modern':
-        return <ModernPdf {...props} />;
-      case 'creative':
-        return <CreativePdf {...props} />;
-      case 'minimal':
-        return <MinimalPdf {...props} />;
+      case 'tech':
+        return <TechPdf {...props} />;
+      case 'standard':
+        return <StandardPdf {...props} />;
       case 'executive':
         return <ExecutivePdf {...props} />;
-      case 'classic':
+      case 'modern-minimal':
+        return <ModernMinimalPdf {...props} />;
+      case 'harvard':
       default:
-        return <ClassicPdf {...props} />;
+        return <HarvardPdf {...props} />;
     }
   };
 

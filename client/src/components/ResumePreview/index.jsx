@@ -10,11 +10,11 @@ import './index.css';
 import { useContext, useRef, useState, useEffect } from 'react';
 import { ResumeContext } from '../../context/ResumeContext.jsx';
 import TEMPLATES from '../../constants/templates.js';
-import ClassicTemplate from '../templates/ClassicTemplate.jsx';
-import ModernTemplate from '../templates/ModernTemplate.jsx';
-import CreativeTemplate from '../templates/CreativeTemplate.jsx';
-import MinimalTemplate from '../templates/MinimalTemplate.jsx';
+import HarvardTemplate from '../templates/HarvardTemplate.jsx';
+import TechTemplate from '../templates/TechTemplate.jsx';
+import StandardTemplate from '../templates/StandardTemplate.jsx';
 import ExecutiveTemplate from '../templates/ExecutiveTemplate.jsx';
+import ModernMinimalTemplate from '../templates/ModernMinimalTemplate.jsx';
 import { HiArrowDownTray } from 'react-icons/hi2';
 
 function ResumePreview() {
@@ -52,17 +52,17 @@ function ResumePreview() {
     };
 
     switch (resume.templateId) {
-      case 'modern':
-        return <ModernTemplate {...props} />;
-      case 'creative':
-        return <CreativeTemplate {...props} />;
-      case 'minimal':
-        return <MinimalTemplate {...props} />;
+      case 'tech':
+        return <TechTemplate {...props} />;
+      case 'standard':
+        return <StandardTemplate {...props} />;
       case 'executive':
         return <ExecutiveTemplate {...props} />;
-      case 'classic':
+      case 'modern-minimal':
+        return <ModernMinimalTemplate {...props} />;
+      case 'harvard':
       default:
-        return <ClassicTemplate {...props} />;
+        return <HarvardTemplate {...props} />;
     }
   };
 

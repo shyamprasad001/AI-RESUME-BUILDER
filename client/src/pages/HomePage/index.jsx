@@ -11,19 +11,19 @@ import toast from 'react-hot-toast';
 import Navbar from '../../components/Navbar';
 import TEMPLATES from '../../constants/templates.js';
 import TemplateCard, { SAMPLE_DATA } from '../../components/TemplateCard';
-import ClassicTemplate from '../../components/templates/ClassicTemplate.jsx';
-import ModernTemplate from '../../components/templates/ModernTemplate.jsx';
-import CreativeTemplate from '../../components/templates/CreativeTemplate.jsx';
-import MinimalTemplate from '../../components/templates/MinimalTemplate.jsx';
+import HarvardTemplate from '../../components/templates/HarvardTemplate.jsx';
+import TechTemplate from '../../components/templates/TechTemplate.jsx';
+import StandardTemplate from '../../components/templates/StandardTemplate.jsx';
 import ExecutiveTemplate from '../../components/templates/ExecutiveTemplate.jsx';
+import ModernMinimalTemplate from '../../components/templates/ModernMinimalTemplate.jsx';
 import { HiDocumentPlus, HiArrowUpTray, HiChartBar, HiArrowRight, HiClock, HiDocumentText, HiXMark } from 'react-icons/hi2';
 
 const TEMPLATE_COMPONENTS = {
-  classic: ClassicTemplate,
-  modern: ModernTemplate,
-  creative: CreativeTemplate,
-  minimal: MinimalTemplate,
+  harvard: HarvardTemplate,
+  tech: TechTemplate,
+  standard: StandardTemplate,
   executive: ExecutiveTemplate,
+  'modern-minimal': ModernMinimalTemplate,
 };
 
 function HomePage() {
@@ -197,7 +197,7 @@ function HomePage() {
 
         {/* Template Preview Modal */}
         {previewTemplate && (() => {
-          const PreviewComp = TEMPLATE_COMPONENTS[previewTemplate.id] || ClassicTemplate;
+          const PreviewComp = TEMPLATE_COMPONENTS[previewTemplate.id] || HarvardTemplate;
           return (
             <div className="modal-overlay" onClick={() => setPreviewTemplate(null)}>
               <div className="template-preview-modal" onClick={(e) => e.stopPropagation()}>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -81,33 +81,33 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 &nbsp;
-const extractTextFromPdf = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (buffer) =&gt; {</span>
-  const uint8Array = <span class="cstat-no" title="statement not covered" >new Uint8Array(buffer);</span>
-  const pdf = <span class="cstat-no" title="statement not covered" >await getDocument({ data: uint8Array }).promise;</span>
-  let fullText = <span class="cstat-no" title="statement not covered" >"";</span>
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >1;</span> i &lt;= pdf.numPages; i++) {</span>
-    const page = <span class="cstat-no" title="statement not covered" >await pdf.getPage(i);</span>
-    const content = <span class="cstat-no" title="statement not covered" >await page.getTextContent();</span>
-    const pageText = <span class="cstat-no" title="statement not covered" >content.items.map(<span class="fstat-no" title="function not covered" >(i</span>tem) =&gt; <span class="cstat-no" title="statement not covered" >item.str)</span>.join(" ");</span>
-<span class="cstat-no" title="statement not covered" >    fullText += pageText + "\n";</span>
+const extractTextFromPdf = async (buffer) =&gt; {
+  const uint8Array = new Uint8Array(buffer);
+  const pdf = await getDocument({ data: uint8Array }).promise;
+  let fullText = "";
+  for (let i = 1; i &lt;= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const pageText = content.items.map((item) =&gt; item.str).join(" ");
+    fullText += pageText + "\n";
   }
-<span class="cstat-no" title="statement not covered" >  return fullText.trim();</span>
+  return fullText.trim();
 };
 &nbsp;
 export default extractTextFromPdf;
@@ -118,7 +118,7 @@ export default extractTextFromPdf;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-24T11:00:45.564Z
+                at 2026-08-29T16:41:53.361Z
             </div>
         <script src="../prettify.js"></script>
         <script>

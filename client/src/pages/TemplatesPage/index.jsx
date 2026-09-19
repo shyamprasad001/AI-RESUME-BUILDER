@@ -10,19 +10,19 @@ import Navbar from '../../components/Navbar';
 import TemplateCard, { SAMPLE_DATA } from '../../components/TemplateCard';
 import TEMPLATES from '../../constants/templates.js';
 import { createResume } from '../../services/resumeService.js';
-import ClassicTemplate from '../../components/templates/ClassicTemplate.jsx';
-import ModernTemplate from '../../components/templates/ModernTemplate.jsx';
-import CreativeTemplate from '../../components/templates/CreativeTemplate.jsx';
-import MinimalTemplate from '../../components/templates/MinimalTemplate.jsx';
+import HarvardTemplate from '../../components/templates/HarvardTemplate.jsx';
+import TechTemplate from '../../components/templates/TechTemplate.jsx';
+import StandardTemplate from '../../components/templates/StandardTemplate.jsx';
 import ExecutiveTemplate from '../../components/templates/ExecutiveTemplate.jsx';
+import ModernMinimalTemplate from '../../components/templates/ModernMinimalTemplate.jsx';
 import { HiXMark } from 'react-icons/hi2';
 
 const TEMPLATE_COMPONENTS = {
-  classic: ClassicTemplate, modern: ModernTemplate, creative: CreativeTemplate,
-  minimal: MinimalTemplate, executive: ExecutiveTemplate,
+  harvard: HarvardTemplate, tech: TechTemplate, standard: StandardTemplate,
+  'modern-minimal': ModernMinimalTemplate, executive: ExecutiveTemplate,
 };
 
-const POPULAR_IDS = ['classic', 'modern', 'creative'];
+const POPULAR_IDS = ['harvard', 'tech', 'standard'];
 
 function TemplatesPage() {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ function TemplatesPage() {
 
       {/* Template Preview Modal */}
       {previewTemplate && (() => {
-        const PreviewComp = TEMPLATE_COMPONENTS[previewTemplate.id] || ClassicTemplate;
+        const PreviewComp = TEMPLATE_COMPONENTS[previewTemplate.id] || HarvardTemplate;
         return (
           <div className="modal-overlay" onClick={() => setPreviewTemplate(null)}>
             <div className="template-preview-modal" onClick={(e) => e.stopPropagation()}>

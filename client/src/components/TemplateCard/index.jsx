@@ -7,11 +7,11 @@
 
 import './index.css';
 import { HiCheckCircle } from 'react-icons/hi2';
-import ClassicTemplate from '../templates/ClassicTemplate.jsx';
-import ModernTemplate from '../templates/ModernTemplate.jsx';
-import CreativeTemplate from '../templates/CreativeTemplate.jsx';
-import MinimalTemplate from '../templates/MinimalTemplate.jsx';
+import HarvardTemplate from '../templates/HarvardTemplate.jsx';
+import TechTemplate from '../templates/TechTemplate.jsx';
+import StandardTemplate from '../templates/StandardTemplate.jsx';
 import ExecutiveTemplate from '../templates/ExecutiveTemplate.jsx';
+import ModernMinimalTemplate from '../templates/ModernMinimalTemplate.jsx';
 
 const SAMPLE_DATA = {
   personalInfo: { fullName: 'Alex Johnson', email: 'alex.johnson@email.com', phone: '(555) 123-4567', location: 'San Francisco, CA', linkedIn: 'linkedin.com/in/alexjohnson', portfolio: 'alexjohnson.dev' },
@@ -27,12 +27,12 @@ const SAMPLE_DATA = {
 };
 
 const templateComponents = {
-  classic: ClassicTemplate, modern: ModernTemplate, creative: CreativeTemplate,
-  minimal: MinimalTemplate, executive: ExecutiveTemplate,
+  harvard: HarvardTemplate, tech: TechTemplate, standard: StandardTemplate,
+  'modern-minimal': ModernMinimalTemplate, executive: ExecutiveTemplate,
 };
 
 function TemplateCard({ template, isActive, onSelect }) {
-  const TemplateComponent = templateComponents[template.id] || ClassicTemplate;
+  const TemplateComponent = templateComponents[template.id] || HarvardTemplate;
 
   return (
     <button type="button" onClick={onSelect} className="template-page-btn">

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,30 +100,30 @@
 <a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,20 +134,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import rateLimit from 'express-rate-limit';
 import logger from '../utils/logger.js';
 &nbsp;
-const createLimiter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(o</span>ptions) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return rateLimit({</span>
+const createLimiter = (options) =&gt; {
+  return rateLimit({
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    handler: <span class="fstat-no" title="function not covered" >(r</span>eq, res, next, options) =&gt; {
-<span class="cstat-no" title="statement not covered" >      logger.warn({ ip: req.ip, path: req.originalUrl }, 'Rate limit exceeded');</span>
-<span class="cstat-no" title="statement not covered" >      res.status(options.statusCode).send(options.message);</span>
+    handler: (req, res, next, options) =&gt; {
+      logger.warn({ ip: req.ip, path: req.originalUrl }, 'Rate limit exceeded');
+      res.status(options.statusCode).send(options.message);
     },
     ...options,
   });
 };
 &nbsp;
 // Global Limiter: 100 requests per 15 minutes
-export const globalLimiter = <span class="cstat-no" title="statement not covered" >createLimiter({</span>
+export const globalLimiter = createLimiter({
   windowMs: 15 * 60 * 1000,
   max: parseInt(process.env.RATE_LIMIT_GLOBAL_MAX || '100', 10),
   message: {
@@ -157,7 +157,7 @@ export const globalLimiter = <span class="cstat-no" title="statement not covered
 });
 &nbsp;
 // Strict Limiter (AI &amp; Heavy Endpoints): 5 requests per 1 minute
-export const strictLimiter = <span class="cstat-no" title="statement not covered" >createLimiter({</span>
+export const strictLimiter = createLimiter({
   windowMs: 1 * 60 * 1000,
   max: parseInt(process.env.RATE_LIMIT_STRICT_MAX || '5', 10),
   message: {
@@ -172,7 +172,7 @@ export const strictLimiter = <span class="cstat-no" title="statement not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-24T11:00:45.564Z
+                at 2026-08-29T16:41:53.361Z
             </div>
         <script src="../prettify.js"></script>
         <script>

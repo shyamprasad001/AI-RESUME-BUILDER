@@ -1,33 +1,31 @@
 import { View, Text, Link, StyleSheet } from '@react-pdf/renderer';
 
-function ExecutivePdf({ sections, colors, targetRole }) {
+function ModernMinimalPdf({ sections, colors, targetRole }) {
   const { personalInfo, summary, experience, education, skills, projects, certifications } = sections;
 
   const styles = StyleSheet.create({
-    page: { padding: 40, fontFamily: 'Times-Roman', color: '#1e293b', fontSize: 11, lineHeight: 1.5 },
-    header: { textAlign: 'center', marginBottom: 20 },
-    name: { fontSize: 26, fontFamily: 'Times-Bold', color: '#0f172a', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 1 },
-    role: { fontSize: 14, fontFamily: 'Times-Italic', color: '#334155', marginBottom: 8 },
-    contactRow: { flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 12, fontSize: 10, color: '#475569' },
-    sectionTitle: { fontSize: 13, fontFamily: 'Times-Bold', textTransform: 'uppercase', color: '#0f172a', borderBottom: '1pt solid #cbd5e1', paddingBottom: 4, marginBottom: 12, marginTop: 16, letterSpacing: 1 },
+    page: { padding: 40, fontFamily: 'Helvetica', color: '#262626', fontSize: 10, lineHeight: 1.5 },
+    header: { marginBottom: 20 },
+    name: { fontSize: 20, color: '#171717', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 2 },
+    contactRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, fontSize: 8, color: '#737373', textTransform: 'uppercase', letterSpacing: 1 },
+    sectionTitle: { fontSize: 9, fontFamily: 'Helvetica-Bold', textTransform: 'uppercase', letterSpacing: 2, color: '#525252', paddingBottom: 6, marginBottom: 12, marginTop: 20 },
     section: { marginBottom: 12 },
-    row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 },
-    title: { fontSize: 12, fontFamily: 'Times-Bold', color: '#0f172a' },
-    subtitle: { fontSize: 11, fontFamily: 'Times-Italic', color: '#334155' },
-    dates: { fontSize: 11, color: '#64748b' },
+    row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 3 },
+    title: { fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#171717' },
+    subtitle: { fontSize: 11, color: '#525252' },
+    dates: { fontSize: 9, color: '#a3a3a3', textTransform: 'uppercase', letterSpacing: 1 },
     bulletItem: { flexDirection: 'row', marginLeft: 16, marginTop: 4 },
     bulletDot: { width: 8, fontSize: 10 },
-    bulletText: { flex: 1, fontSize: 11, lineHeight: 1.5, color: '#334155', textAlign: 'justify' },
-    skillLine: { fontSize: 11, marginTop: 4, color: '#334155', textAlign: 'justify' },
-    bold: { fontFamily: 'Times-Bold', color: '#0f172a' },
-    text: { fontSize: 11, lineHeight: 1.5, color: '#334155', textAlign: 'justify' }
+    bulletText: { flex: 1, fontSize: 10, lineHeight: 1.6, color: '#404040', textAlign: 'justify' },
+    skillLine: { fontSize: 10, marginTop: 4, color: '#404040', textAlign: 'justify' },
+    bold: { fontFamily: 'Helvetica-Bold' },
+    text: { fontSize: 10, lineHeight: 1.6, color: '#404040', textAlign: 'justify' }
   });
 
   return (
     <View style={styles.page}>
       <View style={styles.header}>
         <Text style={styles.name}>{personalInfo.fullName || 'Your Name'}</Text>
-        {targetRole && <Text style={styles.role}>{targetRole}</Text>}
         <View style={styles.contactRow}>
           {personalInfo.email && <Text>{personalInfo.email}</Text>}
           {personalInfo.phone && <Text>{personalInfo.phone}</Text>}
@@ -38,20 +36,20 @@ function ExecutivePdf({ sections, colors, targetRole }) {
 
       {summary ? (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Executive Summary</Text>
+          <Text style={styles.sectionTitle}>Summary</Text>
           <Text style={styles.text}>{summary}</Text>
         </View>
       ) : null}
 
       {experience.length > 0 && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Experience</Text>
+          <Text style={styles.sectionTitle}>Experience</Text>
           {experience.map((exp, i) => (
-            <View key={i} style={{ marginBottom: 16 }}>
+            <View key={i} style={{ marginBottom: 12 }}>
               <View style={styles.row}>
                 <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap' }}>
                   <Text style={styles.title}>{exp.role}</Text>
-                  {exp.company && <Text style={styles.subtitle}>, {exp.company}</Text>}
+                  {exp.company && <Text style={styles.subtitle}> / {exp.company}</Text>}
                 </View>
                 <Text style={styles.dates}>
                   {exp.startDate}{exp.startDate && (exp.endDate || exp.current) ? ' - ' : ''}
@@ -60,7 +58,7 @@ function ExecutivePdf({ sections, colors, targetRole }) {
               </View>
               {exp.bullets && exp.bullets.map((bullet, j) => (
                 <View key={j} style={styles.bulletItem}>
-                  <Text style={styles.bulletDot}>▪</Text>
+                  <Text style={styles.bulletDot}>•</Text>
                   <Text style={styles.bulletText}>{bullet}</Text>
                 </View>
               ))}
@@ -75,8 +73,8 @@ function ExecutivePdf({ sections, colors, targetRole }) {
           {education.map((edu, i) => (
             <View key={i} style={[styles.row, { marginBottom: 8 }]}>
               <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap' }}>
-                <Text style={styles.title}>{edu.degree}{edu.field && ` in ${edu.field}`}</Text>
-                {edu.institution && <Text style={styles.subtitle}>, {edu.institution}</Text>}
+                <Text style={styles.title}>{edu.degree}{edu.field && ` - ${edu.field}`}</Text>
+                {edu.institution && <Text style={styles.subtitle}> / {edu.institution}</Text>}
               </View>
               <Text style={styles.dates}>
                 {edu.startDate}{edu.startDate && edu.endDate ? ' - ' : ''}{edu.endDate}
@@ -88,17 +86,17 @@ function ExecutivePdf({ sections, colors, targetRole }) {
 
       {(skills.technical.length > 0 || skills.soft.length > 0) && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Core Competencies</Text>
-          {skills.soft.length > 0 && (
-            <Text style={styles.skillLine}>
-              <Text style={styles.bold}>Leadership: </Text>
-              {skills.soft.join(', ')}
-            </Text>
-          )}
+          <Text style={styles.sectionTitle}>Skills</Text>
           {skills.technical.length > 0 && (
             <Text style={styles.skillLine}>
-              <Text style={styles.bold}>Technical: </Text>
-              {skills.technical.join(', ')}
+              <Text style={styles.bold}>Tech: </Text>
+              {skills.technical.join(' • ')}
+            </Text>
+          )}
+          {skills.soft.length > 0 && (
+            <Text style={styles.skillLine}>
+              <Text style={styles.bold}>Soft: </Text>
+              {skills.soft.join(' • ')}
             </Text>
           )}
         </View>
@@ -107,4 +105,4 @@ function ExecutivePdf({ sections, colors, targetRole }) {
   );
 }
 
-export default ExecutivePdf;
+export default ModernMinimalPdf;

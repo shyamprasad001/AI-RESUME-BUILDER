@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Resume from "../models/Resume.model.js";
+import Resume from "../models/resume.model.js";
 import normalizeCertifications from "../utils/normalizeCertifications.js";
 
 // Strip invalid _id fields from subdocument arrays before saving.

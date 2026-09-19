@@ -1,6 +1,6 @@
 import * as aiService from "../services/ai.service.js";
 import ChatHistory from "../models/ChatHistory.model.js";
-import Resume from "../models/Resume.model.js";
+import Resume from "../models/resume.model.js";
 
 export const chat = async (req, res, next) => {
   try {

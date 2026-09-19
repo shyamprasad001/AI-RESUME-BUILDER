@@ -1,4 +1,4 @@
-import Resume from "../models/Resume.model.js";
+import Resume from "../models/resume.model.js";
 import ResumeVersion from "../models/ResumeVersion.model.js";
 
 export const saveVersion = async (resumeId, userId, label) => {

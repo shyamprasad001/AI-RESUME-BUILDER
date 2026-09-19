@@ -1,6 +1,6 @@
 import { DynamicStructuredTool } from "@langchain/core/tools";
 import { z } from "zod";
-import Resume from "../models/Resume.model.js";
+import Resume from "../models/resume.model.js";
 
 // Factory function — creates tools with access to request context (resumeId, etc.)
 // Uses closure pattern so each tool can access the shared context

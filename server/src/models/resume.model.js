@@ -76,8 +76,8 @@ const resumeSchema = new mongoose.Schema(
     },
     templateId: {
       type: String,
-      enum: ["classic", "modern", "creative", "minimal", "executive"],
-      default: "classic",
+      enum: ["harvard", "tech", "standard", "executive", "modern-minimal"],
+      default: "harvard",
     },
     targetRole: {
       type: String,

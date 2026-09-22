@@ -27,7 +27,7 @@ function ChatMessage({ role, content, timestamp, extractedData, onApply }) {
           </div>
         )}
 
-        <p className="text-sm">
+        <p style={{ color: 'inherit' }}>
           {content}
         </p>
 

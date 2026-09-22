@@ -14,6 +14,7 @@ import { errorHandler, notFoundHandler } from './middleware/error.middleware.js'
 import { globalLimiter } from './middleware/rateLimiter.middleware.js';
 
 const app = express(); // Express app instance (Express.js: Application Setup)
+app.set('trust proxy', 1); // Trust first proxy (Render) for rate limiting
 
 // --- Middleware ---
 app.use(pinoHttp({ logger }));

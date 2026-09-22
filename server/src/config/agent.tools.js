@@ -55,8 +55,8 @@ export const createAgentTools = (context, aiService) => {
       rawExperience: z
         .string()
         .describe("The raw experience description to improve"),
-      company: z.string().optional().describe("The company name for context"),
-      role: z.string().optional().describe("The job role/title for context"),
+      company: z.string().optional().nullable().describe("The company name for context"),
+      role: z.string().optional().nullable().describe("The job role/title for context"),
     }),
     func: async ({ rawExperience, company, role }) => {
       const result = await aiService.generateBullets({
@@ -79,6 +79,7 @@ export const createAgentTools = (context, aiService) => {
       jobDescription: z
         .string()
         .optional()
+        .nullable()
         .describe("The job description to score against."),
     }),
     func: async ({ jobDescription }) => {

@@ -1,12 +1,15 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ChatOpenAI } from "@langchain/openai";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { createAgentTools } from "../config/agent.tools.js";
 import * as aiService from "./ai.service.js";
 
-// Initialize the model
-const model = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",
-  apiKey: process.env.GEMINI_API_KEY,
+// Initialize the model using Nvidia Nemotron
+const model = new ChatOpenAI({
+  model: "nvidia/nemotron-3-ultra-550b-a55b",
+  apiKey: process.env.NVIDIA_API_KEY ? process.env.NVIDIA_API_KEY.trim() : "",
+  configuration: {
+    baseURL: "https://integrate.api.nvidia.com/v1",
+  },
   maxRetries: 1,
 });
 

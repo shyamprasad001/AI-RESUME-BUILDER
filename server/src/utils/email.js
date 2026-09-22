@@ -1,4 +1,9 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Force Node.js to use IPv4 first when resolving DNS. 
+// This fixes ENETUNREACH on cloud environments with partial IPv6 support (like Render)
+dns.setDefaultResultOrder('ipv4first');
 
 const sendEmail = async (options) => {
   try {

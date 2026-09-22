@@ -7,7 +7,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext.jsx';
-import { register, emailLogin, googleLogin } from '../../services/authService.js';
+import { sendOtp, register, emailLogin, googleLogin } from '../../services/authService.js';
 import {
   HiDocumentText, HiShieldCheck, HiSparkles,
   HiCheck, HiChartBar, HiChatBubbleLeftRight,
@@ -18,6 +18,9 @@ function LoginPage() {
   const [name, setName]             = useState('');
   const [email, setEmail]           = useState('');
   const [password, setPassword]     = useState('');
+  const [otp, setOtp]               = useState('');
+  const [showOtpInput, setShowOtpInput] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isLoading, setIsLoading]   = useState(false);
   const { login } = useContext(AuthContext);
   const navigate  = useNavigate();
@@ -25,10 +28,26 @@ function LoginPage() {
   // ── Handlers (unchanged) ──────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // OTP Sending Step
+    if (isRegister && !showOtpInput) {
+      setIsSendingOtp(true);
+      try {
+        await sendOtp(email);
+        setShowOtpInput(true);
+        toast.success('Verification code sent to your email!');
+      } catch (error) {
+        toast.error(error.response?.data?.message || 'Failed to send verification code');
+      }
+      setIsSendingOtp(false);
+      return;
+    }
+
+    // Final Registration or Login Step
     setIsLoading(true);
     try {
       const result = isRegister
-        ? await register(name, email, password)
+        ? await register(name, email, password, otp)
         : await emailLogin(email, password);
       login(result.token, result.user);
       toast.success(isRegister ? 'Account created!' : 'Welcome back!');
@@ -173,36 +192,62 @@ function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="input-field"
                 placeholder="you@example.com"
+                disabled={showOtpInput}
                 required
               />
             </div>
-            <div className="form-group">
-              <label className="label-text">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input-field"
-                placeholder="At least 6 characters"
-                minLength={6}
-                required
-              />
-            </div>
+            
+            {isRegister && showOtpInput && (
+              <div className="form-group">
+                <label className="label-text">Verification Code</label>
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="input-field"
+                  placeholder="6-digit code"
+                  required
+                />
+              </div>
+            )}
+
+            {(!isRegister || showOtpInput) && (
+              <div className="form-group">
+                <label className="label-text">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input-field"
+                  placeholder="At least 6 characters"
+                  minLength={6}
+                  required
+                />
+              </div>
+            )}
             <button
               type="submit"
-              disabled={isLoading}
-              className={`btn btn-primary-gradient btn-full ${isLoading ? 'btn-disabled' : ''}`}
+              disabled={isLoading || isSendingOtp}
+              className={`btn btn-primary-gradient btn-full ${(isLoading || isSendingOtp) ? 'btn-disabled' : ''}`}
               style={{ marginTop: '8px', padding: '11px 20px' }}
             >
-              {isLoading ? 'Please wait…' : isRegister ? 'Create Account' : 'Sign In'}
+              {(isLoading || isSendingOtp) 
+                ? 'Please wait…' 
+                : (isRegister && !showOtpInput) 
+                  ? 'Send Verification Code'
+                  : (isRegister ? 'Create Account' : 'Sign In')}
             </button>
           </form>
 
-          <p className="login-toggle-text">
+          <p className="login-form-footer">
             {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
-            <button
-              onClick={() => setIsRegister(!isRegister)}
+            <button 
+              type="button" 
               className="login-toggle-btn"
+              onClick={() => {
+                setIsRegister(!isRegister);
+                setShowOtpInput(false);
+              }}
             >
               {isRegister ? 'Sign In' : 'Sign Up'}
             </button>

@@ -5,8 +5,13 @@
 
 import API from './api.js';
 
-const register = async (name, email, password) => {
-  const response = await API.post('/auth/register', { name, email, password });
+const sendOtp = async (email) => {
+  const response = await API.post('/auth/send-otp', { email });
+  return response.data;
+};
+
+const register = async (name, email, password, otp) => {
+  const response = await API.post('/auth/register', { name, email, password, otp });
   return response.data;
 };
 
@@ -30,4 +35,4 @@ const logout = async () => {
   return response;
 };
 
-export { register, emailLogin, googleLogin, getMe, logout };
+export { sendOtp, register, emailLogin, googleLogin, getMe, logout };

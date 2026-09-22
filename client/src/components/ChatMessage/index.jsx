@@ -27,12 +27,12 @@ function ChatMessage({ role, content, timestamp, extractedData, onApply }) {
           </div>
         )}
 
-        <p style={{ color: 'inherit' }}>
+        <p className={`text-sm ${isUser ? 'text-white' : 'text-gray-800'}`}>
           {content}
         </p>
 
         <div className={`flex-row items-center gap-sm mt-sm ${isUser ? 'justify-end' : 'flex-between'}`}>
-          <span className="chat-timestamp">
+          <span className={`text-xs ${isUser ? 'text-white' : 'text-gray-400'}`} style={isUser ? { opacity: 0.8 } : {}}>
             {formatTime(timestamp)}
           </span>
 

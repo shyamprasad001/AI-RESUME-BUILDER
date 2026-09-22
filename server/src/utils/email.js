@@ -1,9 +1,5 @@
 import nodemailer from 'nodemailer';
-import dns from 'dns';
-
-// Force Node.js to use IPv4 first when resolving DNS. 
-// This fixes ENETUNREACH on cloud environments with partial IPv6 support (like Render)
-dns.setDefaultResultOrder('ipv4first');
+import dns from 'dns/promises';
 
 const sendEmail = async (options) => {
   try {
@@ -15,15 +11,29 @@ const sendEmail = async (options) => {
       return;
     }
 
+    let hostIp = process.env.SMTP_HOST;
+    try {
+      // Manually force IPv4 resolution to bypass Render/Node IPv6 bugs
+      const ips = await dns.resolve4(process.env.SMTP_HOST);
+      if (ips && ips.length > 0) {
+        hostIp = ips[0];
+      }
+    } catch (dnsError) {
+      console.warn(`Could not resolve IPv4 for ${process.env.SMTP_HOST}, falling back to default.`, dnsError);
+    }
+
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
+      host: hostIp,
       port: process.env.SMTP_PORT || 587,
       secure: process.env.SMTP_PORT == 465, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      family: 4, // Force IPv4 to fix ENETUNREACH on Render/cloud hosts
+      tls: {
+        // Must provide servername when connecting directly to an IP address
+        servername: process.env.SMTP_HOST,
+      }
     });
 
     const mailOptions = {

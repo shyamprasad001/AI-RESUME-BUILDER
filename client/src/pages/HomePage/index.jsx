@@ -35,7 +35,7 @@ function HomePage() {
   const [showCreate, setShowCreate] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [newTitle, setNewTitle] = useState('');
-  const [newTemplate, setNewTemplate] = useState('classic');
+  const [newTemplate, setNewTemplate] = useState('harvard');
   const [newTargetRole, setNewTargetRole] = useState('');
   const [uploadFile, setUploadFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);

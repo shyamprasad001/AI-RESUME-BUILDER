@@ -38,7 +38,7 @@ describe('Resume Service', () => {
       expect(mockResumeCreate).toHaveBeenCalledWith({
         userId: 'user123',
         title: 'Untitled Resume',
-        templateId: 'classic',
+        templateId: 'harvard',
         targetRole: '',
       });
       expect(result).toEqual(mockResult);

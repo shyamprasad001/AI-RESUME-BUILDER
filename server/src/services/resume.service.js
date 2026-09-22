@@ -38,7 +38,7 @@ export const createResume = async (userId, data = {}) => {
   const resume = await Resume.create({
     userId,
     title: data.title || "Untitled Resume",
-    templateId: data.templateId || "classic",
+    templateId: data.templateId || "harvard",
     targetRole: data.targetRole || "",
   });
   return resume;
@@ -144,7 +144,7 @@ export const createFromUpload = async (
   const resume = await Resume.create({
     userId,
     title,
-    templateId: "classic",
+    templateId: "harvard",
     sections: safeSections,
   });
   return resume;

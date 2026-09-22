@@ -92,11 +92,11 @@ export const updateTemplate = async (req, res, next) => {
   try {
     const { templateId } = req.body;
     const validTemplates = [
-      "classic",
-      "modern",
-      "creative",
-      "minimal",
+      "harvard",
+      "tech",
+      "standard",
       "executive",
+      "modern-minimal",
     ];
     if (!validTemplates.includes(templateId)) {
       return res

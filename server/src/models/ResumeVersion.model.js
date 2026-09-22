@@ -27,7 +27,7 @@ const resumeVersionSchema = new mongoose.Schema(
     },
     templateId: {
       type: String,
-      default: "classic",
+      default: "harvard",
     },
     atsScore: {
       type: Number,

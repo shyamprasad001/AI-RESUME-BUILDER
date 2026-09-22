@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -196,7 +196,7 @@
 <a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -208,7 +208,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,7 +220,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +231,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,7 +241,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,7 +257,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,7 +304,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,15 +318,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import mongoose from "mongoose";
 &nbsp;
 // Nested subdocument schemas (MongoDB: Embedded Documents)
-const experienceSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const experienceSchema = new mongoose.Schema(
   {
     company: { type: String, default: "" },
     role: { type: String, default: "" },
@@ -338,7 +338,7 @@ const experienceSchema = <span class="cstat-no" title="statement not covered" >n
   { _id: true },
 );
 &nbsp;
-const educationSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const educationSchema = new mongoose.Schema(
   {
     institution: { type: String, default: "" },
     degree: { type: String, default: "" },
@@ -350,7 +350,7 @@ const educationSchema = <span class="cstat-no" title="statement not covered" >ne
   { _id: true },
 );
 &nbsp;
-const projectSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const projectSchema = new mongoose.Schema(
   {
     name: { type: String, default: "" },
     description: { type: String, default: "" },
@@ -361,7 +361,7 @@ const projectSchema = <span class="cstat-no" title="statement not covered" >new 
   { _id: true },
 );
 &nbsp;
-const certificationSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const certificationSchema = new mongoose.Schema(
   {
     name: { type: String, default: "" },
     issuer: { type: String, default: "" },
@@ -371,7 +371,7 @@ const certificationSchema = <span class="cstat-no" title="statement not covered"
   { _id: true },
 );
 &nbsp;
-const atsBreakdownSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const atsBreakdownSchema = new mongoose.Schema(
   {
     keywordMatch: { type: Number, default: 0 },
     formatting: { type: Number, default: 0 },
@@ -387,7 +387,7 @@ const atsBreakdownSchema = <span class="cstat-no" title="statement not covered" 
   { _id: false },
 );
 &nbsp;
-const resumeSchema = <span class="cstat-no" title="statement not covered" >new mongoose.Schema(</span>
+const resumeSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -401,8 +401,8 @@ const resumeSchema = <span class="cstat-no" title="statement not covered" >new m
     },
     templateId: {
       type: String,
-      enum: ["classic", "modern", "creative", "minimal", "executive"],
-      default: "classic",
+      enum: ["harvard", "tech", "standard", "executive", "modern-minimal"],
+      default: "harvard",
     },
     targetRole: {
       type: String,
@@ -434,7 +434,7 @@ const resumeSchema = <span class="cstat-no" title="statement not covered" >new m
     },
     atsScore: {
       overall: { type: Number, default: 0 },
-      breakdown: { type: atsBreakdownSchema, default: <span class="fstat-no" title="function not covered" >()</span> =&gt; (<span class="cstat-no" title="statement not covered" >{})</span> },
+      breakdown: { type: atsBreakdownSchema, default: () =&gt; ({}) },
       missingKeywords: [{ type: String }],
       suggestions: [{ type: String }],
     },
@@ -448,9 +448,9 @@ const resumeSchema = <span class="cstat-no" title="statement not covered" >new m
   },
 );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >resumeSchema.index({ userId: 1, createdAt: -1 });</span>
+resumeSchema.index({ userId: 1, createdAt: -1 });
 &nbsp;
-const Resume = <span class="cstat-no" title="statement not covered" >mongoose.model("Resume", resumeSchema);</span>
+const Resume = mongoose.model("Resume", resumeSchema);
 &nbsp;
 export default Resume;
 &nbsp;</pre></td></tr></table></pre>
@@ -460,7 +460,7 @@ export default Resume;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-29T16:41:53.361Z
+                at 2026-09-22T12:47:37.062Z
             </div>
         <script src="../prettify.js"></script>
         <script>

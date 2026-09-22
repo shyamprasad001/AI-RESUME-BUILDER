@@ -29,7 +29,7 @@ function TemplatesPage() {
   const [previewTemplate, setPreviewTemplate] = useState(null);
   const [showCreate, setShowCreate] = useState(false);
   const [newTitle, setNewTitle] = useState('');
-  const [newTemplate, setNewTemplate] = useState('classic');
+  const [newTemplate, setNewTemplate] = useState('harvard');
   const [newTargetRole, setNewTargetRole] = useState('');
 
   const handleCreate = async (e) => {

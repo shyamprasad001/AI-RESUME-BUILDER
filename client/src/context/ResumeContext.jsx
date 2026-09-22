@@ -12,7 +12,7 @@ const ResumeContext = createContext(null);
 const initialResume = {
   _id: null,
   title: 'Untitled Resume',
-  templateId: 'classic',
+  templateId: 'harvard',
   targetRole: '',
   jobDescription: '',
   sections: {

@@ -111,7 +111,7 @@ describe('Version Service', () => {
 
   describe('restoreVersion', () => {
     it('should update resume with version snapshot', async () => {
-      const mockVersion = { snapshot: {}, templateId: 'classic', jobDescription: 'JD' };
+      const mockVersion = { snapshot: {}, templateId: 'harvard', jobDescription: 'JD' };
       // By mocking getVersionById internally via its module or mocking the DB call
       mockResumeVersionFindOne.mockResolvedValue(mockVersion); // used by getVersionById
 

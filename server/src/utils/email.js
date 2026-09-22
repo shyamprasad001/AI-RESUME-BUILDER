@@ -33,7 +33,10 @@ const sendEmail = async (options) => {
       tls: {
         // Must provide servername when connecting directly to an IP address
         servername: process.env.SMTP_HOST,
-      }
+      },
+      connectionTimeout: 5000, // Fail fast if Render blocks the outbound port
+      greetingTimeout: 5000,
+      socketTimeout: 5000,
     });
 
     const mailOptions = {

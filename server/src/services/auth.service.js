@@ -9,58 +9,17 @@ import bcrypt from 'bcryptjs';
 import User from '../models/User.model.js';
 import { verifyGoogleToken } from '../config/google.config.js';
 import { generateToken } from '../utils/jwt.utils.js';
-import Otp from '../models/Otp.model.js';
-import sendEmail from '../utils/email.js';
 
-export const sendOtp = async (email) => {
+export const register = async (name, email, password) => {
   const existing = await User.findOne({ email });
   if (existing) {
     const error = new Error('Email already registered.');
     error.statusCode = 409;
-    throw error;
-  }
-
-  // Generate 6-digit OTP
-  const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
-
-  // Save OTP in database (overwrites existing unexpired OTP for this email)
-  await Otp.findOneAndUpdate(
-    { email },
-    { otp: otpCode, createdAt: Date.now() },
-    { upsert: true, new: true }
-  );
-
-  // Send Email
-  await sendEmail({
-    email,
-    subject: 'Your AI Resume Builder Verification Code',
-    message: `Your verification code is: ${otpCode}\nThis code will expire in 10 minutes.`,
-  });
-
-  return { message: 'OTP sent successfully' };
-};
-
-export const register = async (name, email, password, otp) => {
-  const existing = await User.findOne({ email });
-  if (existing) {
-    const error = new Error('Email already registered.');
-    error.statusCode = 409;
-    throw error;
-  }
-
-  const otpRecord = await Otp.findOne({ email });
-  if (!otpRecord || otpRecord.otp !== otp) {
-    const error = new Error('Invalid or expired OTP.');
-    error.statusCode = 400;
     throw error;
   }
 
   const hashedPassword = await bcrypt.hash(password, 10); // bcrypt password hashing (Express.js: Authentication)
   const user = await User.create({ name, email, password: hashedPassword });
-  
-  // Delete OTP after successful registration
-  await Otp.deleteOne({ email });
-
   const token = generateToken(user); // JWT token generation (Express.js: Authentication)
 
   return {
